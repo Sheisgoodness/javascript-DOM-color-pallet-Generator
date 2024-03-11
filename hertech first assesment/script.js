@@ -10,9 +10,25 @@ document.addEventListener('DOMContentLoaded', function () {
         return color;
     }
 
+    function getFontColorForBackground(background) {
+        // Calculate the relative luminance of the background color
+        const rgb = parseInt(background.substr(1), 16);
+        const r = (rgb >> 16) & 0xff;
+        const g = (rgb >>  8) & 0xff;
+        const b = (rgb >>  0) & 0xff;
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+        // Choose white or black based on the luminance
+        return luminance > 0.5 ? '#000000' : '#ffffff';
+    }
+
     window.changeColor = function () {
         const newColor = getRandomColor();
         document.body.style.backgroundColor = newColor;
+        const fontColor = getFontColorForBackground(newColor);
+        document.body.style.color = fontColor;
+        const h1Title = document.querySelector('h1');
+        h1Title.style.color = fontColor;
         colorHistory.push(newColor);
         updateColorHistory();
         updateCurrentColorInfo(newColor);
@@ -23,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const color2 = getRandomColor();
         const gradient = `linear-gradient(to right, ${color1}, ${color2})`;
         document.body.style.background = gradient;
+        const fontColor = getFontColorForBackground(gradient);
+        document.body.style.color = fontColor;
+        const h1Title = document.querySelector('h1');
+        h1Title.style.color = fontColor;
         colorHistory.push(gradient);
         updateColorHistory();
         updateCurrentColorInfo(gradient);
@@ -39,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             colorBox.addEventListener('click', function () {
                 document.body.style.background = color;
+                const fontColor = getFontColorForBackground(color);
+                document.body.style.color = fontColor;
+                const h1Title = document.querySelector('h1');
+                h1Title.style.color = fontColor;
                 updateCurrentColorInfo(color);
             });
 
@@ -48,7 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateCurrentColorInfo(color) {
         const colorInfo = document.getElementById('currentColorInfo');
+        const h1Title = document.querySelector('h1');
+
         colorInfo.textContent = `Current Color: ${color}`;
+        h1Title.style.color = getFontColorForBackground(color);
     }
 
     window.copyToClipboard = function () {
