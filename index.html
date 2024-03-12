@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Color Palette Generator</title>
+    <meta name="description" content="Generate beautiful and unique color palettes with a click. Explore gradients and copy color codes effortlessly.">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Unique Color Palette Generator</h1>
+        <p>Create your own beautiful color palette with a click!</p>
+        <button onclick="changeColor()">Generate Color</button>
+        <p id="currentColorInfo">Current Color: #ffffff</p>
+        <button onclick="copyToClipboard()">Copy Color Code</button>
+        <button onclick="generateGradient()">Generate Gradient</button>
+        <div id="colorHistory" class="color-history"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
